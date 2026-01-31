@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LeadScraper AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-slate-900 text-slate-100 min-h-screen">
+    <div id="top"></div>
+    <nav class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="h-9 w-9 rounded-xl bg-cyan-400/20 flex items-center justify-center">
+            <i data-lucide="bot" class="text-cyan-300"></i>
+          </div>
+          <span class="text-lg font-semibold">LeadBot AI</span>
+        </div>
+        <a href="#portfolio" class="text-sm text-slate-300 hover:text-cyan-300 transition">Portfolio</a>
+      </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <section class="grid lg:grid-cols-2 gap-10 items-center">
+        <div class="space-y-6">
+          <p class="text-cyan-300 uppercase tracking-[0.3em] text-xs">Lead Scraper Web App</p>
+          <h1 class="text-4xl lg:text-5xl font-semibold leading-tight animate-[fadeIn_0.8s_ease-in-out]">
+            Automate Your Lead Discovery in Seconds.
+          </h1>
+          <p class="text-slate-300 text-lg">
+            Stop manual searching. Extract names, phones, and websites from any business category worldwide with one click.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button
+              data-recipe
+              data-keyword="Plumbers"
+              data-location="Los Angeles"
+              class="recipe-card group flex flex-1 min-w-[220px] items-center gap-4 bg-slate-800/60 border border-slate-700 rounded-2xl p-4 transition hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(34,211,238,0.2)]"
+            >
+              <span class="h-10 w-10 rounded-xl bg-cyan-400/15 flex items-center justify-center">
+                <i data-lucide="wrench" class="text-cyan-300"></i>
+              </span>
+              <div class="text-left">
+                <p class="text-sm text-slate-400">Recipe 1</p>
+                <p class="font-semibold">Local Service Leads</p>
+              </div>
+            </button>
+            <button
+              data-recipe
+              data-keyword="Marketing Agencies"
+              data-location="London"
+              class="recipe-card group flex flex-1 min-w-[220px] items-center gap-4 bg-slate-800/60 border border-slate-700 rounded-2xl p-4 transition hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(34,211,238,0.2)]"
+            >
+              <span class="h-10 w-10 rounded-xl bg-cyan-400/15 flex items-center justify-center">
+                <i data-lucide="code" class="text-cyan-300"></i>
+              </span>
+              <div class="text-left">
+                <p class="text-sm text-slate-400">Recipe 2</p>
+                <p class="font-semibold">Tech &amp; Agency Leads</p>
+              </div>
+            </button>
+            <button
+              data-recipe
+              data-keyword="Coffee Shops"
+              data-location="Casablanca"
+              class="recipe-card group flex flex-1 min-w-[220px] items-center gap-4 bg-slate-800/60 border border-slate-700 rounded-2xl p-4 transition hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(34,211,238,0.2)]"
+            >
+              <span class="h-10 w-10 rounded-xl bg-cyan-400/15 flex items-center justify-center">
+                <i data-lucide="search" class="text-cyan-300"></i>
+              </span>
+              <div class="text-left">
+                <p class="text-sm text-slate-400">Recipe 3</p>
+                <p class="font-semibold">Custom Search</p>
+              </div>
+            </button>
+          </div>
+        </div>
+        <div class="bg-slate-800/60 border border-slate-700 rounded-3xl p-8 space-y-6">
+          <h2 class="text-xl font-semibold">How it works</h2>
+          <div class="space-y-4">
+            <div class="flex gap-4">
+              <span class="h-10 w-10 rounded-xl bg-cyan-400/15 flex items-center justify-center">
+                <i data-lucide="monitor" class="text-cyan-300"></i>
+              </span>
+              <div>
+                <h3 class="font-semibold">Browser Simulation</h3>
+                <p class="text-sm text-slate-400">Stealth-driven Playwright sessions capture live results.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <span class="h-10 w-10 rounded-xl bg-cyan-400/15 flex items-center justify-center">
+                <i data-lucide="shield-check" class="text-cyan-300"></i>
+              </span>
+              <div>
+                <h3 class="font-semibold">Data Verification</h3>
+                <p class="text-sm text-slate-400">Normalize phone, site, and rating fields in real time.</p>
+              </div>
+            </div>
+            <div class="flex gap-4">
+              <span class="h-10 w-10 rounded-xl bg-cyan-400/15 flex items-center justify-center">
+                <i data-lucide="file-down" class="text-cyan-300"></i>
+              </span>
+              <div>
+                <h3 class="font-semibold">CSV Export</h3>
+                <p class="text-sm text-slate-400">Download clean lead lists in seconds.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboard" class="mt-12 hidden">
+        <main class="grid lg:grid-cols-2 gap-8">
+          <section class="bg-white/5 backdrop-blur rounded-2xl p-6 border border-white/10">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-lg font-semibold">Command Center</h2>
+              <div class="flex items-center gap-2 text-xs text-slate-300">
+                <span class="h-2 w-2 rounded-full bg-cyan-300"></span>
+                <span id="progressTracker">Idle</span>
+              </div>
+            </div>
+            <div class="space-y-5">
+              <div class="grid lg:grid-cols-[2fr_1fr] gap-4">
+                <div>
+                  <label class="text-sm text-slate-300">Smart Search</label>
+                  <div class="relative mt-2 rounded-xl bg-slate-900/70 border border-slate-700">
+                    <span
+                      id="keywordGhost"
+                      class="absolute left-4 top-3 text-slate-500 text-lg pointer-events-none"
+                    ></span>
+                    <input
+                      id="keyword"
+                      type="text"
+                      placeholder="Start typing a B2B category"
+                      class="w-full bg-transparent px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                    />
+                    <ul
+                      id="suggestions"
+                      class="absolute z-20 mt-2 w-full rounded-xl bg-slate-950 border border-slate-800 shadow-xl hidden"
+                    ></ul>
+                  </div>
+                </div>
+                <div>
+                  <label class="text-sm text-slate-300">Location</label>
+                  <div class="mt-2 flex flex-col gap-3">
+                    <input
+                      id="location"
+                      type="text"
+                      placeholder="City or region"
+                      class="rounded-xl bg-slate-900/70 border border-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                    />
+                    <button
+                      id="detectLocation"
+                      class="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-cyan-400/40 text-cyan-200 hover:text-cyan-100 hover:border-cyan-300 transition"
+                    >
+                      <i data-lucide="crosshair"></i>
+                      Auto-detect
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center justify-between bg-slate-900/70 border border-slate-700 rounded-xl px-4 py-3">
+                <div>
+                  <p class="font-semibold">Deep Enrichment</p>
+                  <p class="text-xs text-slate-400">Discover social links + contact emails.</p>
+                </div>
+                <label class="inline-flex items-center cursor-pointer">
+                  <input id="deepSearch" type="checkbox" class="sr-only" />
+                  <div class="w-11 h-6 bg-slate-700 rounded-full relative transition">
+                    <div class="dot absolute left-1 top-1 h-4 w-4 bg-white rounded-full transition"></div>
+                  </div>
+                </label>
+              </div>
+              <div class="bg-slate-900/70 border border-slate-700 rounded-xl px-4 py-3">
+                <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Live Feed</p>
+                <div class="mt-2 grid grid-cols-3 gap-4 text-sm">
+                  <div>
+                    <p class="text-slate-400">Total Leads</p>
+                    <p id="statLeads" class="text-lg font-semibold">0</p>
+                  </div>
+                  <div>
+                    <p class="text-slate-400">Emails</p>
+                    <p id="statEmails" class="text-lg font-semibold">0</p>
+                  </div>
+                  <div>
+                    <p class="text-slate-400">Mobile Numbers</p>
+                    <p id="statPhones" class="text-lg font-semibold">0</p>
+                  </div>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  id="launchBtn"
+                  class="w-full flex items-center justify-center gap-2 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-semibold py-3 rounded-lg transition"
+                >
+                  <i data-lucide="rocket"></i>
+                  Launch Bot
+                </button>
+                <button
+                  id="stopBtn"
+                  class="w-full flex items-center justify-center gap-2 border border-cyan-400/50 text-cyan-200 hover:text-cyan-100 hover:border-cyan-300 py-3 rounded-lg transition"
+                >
+                  <i data-lucide="square"></i>
+                  Stop Bot
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-6 hidden" id="downloadWrap">
+              <a
+                id="downloadBtn"
+                href="/download"
+                class="inline-flex items-center gap-2 text-cyan-300 hover:text-cyan-200 transition"
+              >
+                <i data-lucide="download"></i>
+                Download Results (Excel)
+              </a>
+            </div>
+          </section>
+
+          <section id="advancedView" class="bg-black rounded-2xl p-6 border border-cyan-400/30 shadow-[0_0_25px_rgba(34,211,238,0.15)] hidden">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <i data-lucide="terminal" class="text-cyan-300"></i>
+                <h2 class="text-lg font-semibold text-cyan-200">Live Terminal</h2>
+              </div>
+              <span
+                id="wsStatus"
+                class="text-xs px-2 py-1 rounded-full bg-cyan-400/10 text-cyan-200 border border-cyan-400/30"
+              >
+                Connecting...
+              </span>
+            </div>
+            <div
+              id="terminal"
+              class="h-[320px] overflow-y-auto text-cyan-200 text-sm font-mono space-y-1"
+            >
+              <p>Awaiting connection...</p>
+            </div>
+          </section>
+        </main>
+
+        <div class="mt-4 flex items-center justify-end">
+          <label class="inline-flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
+            <input id="advancedToggle" type="checkbox" class="sr-only" />
+            <span class="w-10 h-6 bg-slate-700 rounded-full relative transition">
+              <span class="adv-dot absolute left-1 top-1 h-4 w-4 bg-white rounded-full transition"></span>
+            </span>
+            Advanced View
+          </label>
+        </div>
+
+        <section class="mt-10 bg-slate-800/60 rounded-2xl p-6 border border-slate-700">
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+            <h2 class="text-lg font-semibold">Real-Time Results</h2>
+            <a
+              id="downloadCsv"
+              href="/download-csv"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-cyan-400/40 text-cyan-300 opacity-50 pointer-events-none"
+            >
+              <i data-lucide="download"></i>
+              Download CSV
+            </a>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-sm text-slate-200">
+              <thead class="text-slate-400">
+                <tr class="border-b border-slate-700">
+                  <th class="text-left py-3 pr-4">Business Name</th>
+                  <th class="text-left py-3 pr-4">Phone</th>
+                  <th class="text-left py-3 pr-4">Website</th>
+                  <th class="text-left py-3 pr-4">Lead Score</th>
+                  <th class="text-left py-3">Status</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody" class="divide-y divide-slate-800">
+                <tr>
+                  <td class="py-3 pr-4 text-slate-500" colspan="5">No results yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="portfolio" class="mt-12 text-center text-sm text-slate-500">
+        Crafted for portfolio showcases · LeadBot AI
+      </section>
+      <section class="mt-12 bg-slate-800/60 border border-slate-700 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-semibold">Ready to scale your outreach?</h3>
+          <p class="text-slate-400">Jump back to the top and launch a new scrape in seconds.</p>
+        </div>
+        <a
+          href="#top"
+          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-cyan-400 text-slate-950 font-semibold hover:bg-cyan-300 transition"
+        >
+          <i data-lucide="arrow-up"></i>
+          Return to Top
+        </a>
+      </section>
+
+      <section class="mt-10 bg-slate-800/60 border border-slate-700 rounded-2xl p-6">
+        <h3 class="text-xl font-semibold mb-4">FAQ</h3>
+        <div class="grid md:grid-cols-3 gap-4 text-sm text-slate-300">
+          <div class="bg-slate-900/60 border border-slate-700 rounded-xl p-4">
+            <h4 class="font-semibold text-slate-100">How fast is a scrape?</h4>
+            <p class="text-slate-400 mt-2">Typical runs finish in minutes depending on your category and location.</p>
+          </div>
+          <div class="bg-slate-900/60 border border-slate-700 rounded-xl p-4">
+            <h4 class="font-semibold text-slate-100">Can I stop a run?</h4>
+            <p class="text-slate-400 mt-2">Yes. Use the Stop Bot button to end the current scrape.</p>
+          </div>
+          <div class="bg-slate-900/60 border border-slate-700 rounded-xl p-4">
+            <h4 class="font-semibold text-slate-100">Where do results go?</h4>
+            <p class="text-slate-400 mt-2">Download CSV or Excel once the first leads arrive.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      const launchBtn = document.getElementById("launchBtn");
+      const terminal = document.getElementById("terminal");
+      const stopBtn = document.getElementById("stopBtn");
+      const downloadWrap = document.getElementById("downloadWrap");
+      const downloadCsv = document.getElementById("downloadCsv");
+      const resultsBody = document.getElementById("resultsBody");
+      const wsStatus = document.getElementById("wsStatus");
+      const dashboard = document.getElementById("dashboard");
+      const recipeCards = document.querySelectorAll("[data-recipe]");
+      const keywordInput = document.getElementById("keyword");
+      const keywordGhost = document.getElementById("keywordGhost");
+      const suggestionList = document.getElementById("suggestions");
+      const locationInput = document.getElementById("location");
+      const detectLocationBtn = document.getElementById("detectLocation");
+      const deepSearchToggle = document.getElementById("deepSearch");
+      const progressTracker = document.getElementById("progressTracker");
+      const advancedToggle = document.getElementById("advancedToggle");
+      const advancedView = document.getElementById("advancedView");
+      const statLeads = document.getElementById("statLeads");
+      const statEmails = document.getElementById("statEmails");
+      const statPhones = document.getElementById("statPhones");
+
+      let ws;
+      let running = false;
+      let suggestions = [];
+      let leadCount = 0;
+      let emailCount = 0;
+      let phoneCount = 0;
+      const enrichmentMap = new Map();
+
+      function appendLog(message) {
+        const line = document.createElement("p");
+        line.textContent = message;
+        terminal.appendChild(line);
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+
+      function setRunning(state) {
+        running = state;
+        launchBtn.disabled = state;
+        stopBtn.disabled = !state;
+        stopBtn.classList.toggle("opacity-50", !state);
+        launchBtn.classList.toggle("animate-pulse", state);
+        launchBtn.classList.toggle("opacity-70", state);
+        launchBtn.innerHTML = state
+          ? '<i data-lucide="loader"></i> Running...'
+          : '<i data-lucide="rocket"></i> Launch Bot';
+        lucide.createIcons();
+      }
+
+      function enableCsvDownload() {
+        downloadCsv.classList.remove("opacity-50", "pointer-events-none");
+        downloadCsv.classList.add("hover:text-cyan-200");
+      }
+
+      function appendResultRow(lead) {
+        if (resultsBody.querySelector("td[colspan='5']")) {
+          resultsBody.innerHTML = "";
+        }
+        const ratingScore = lead.Rating && Number(lead.Rating) >= 4.5 ? 20 : 0;
+        const score = (lead.Website ? 40 : 0) + (lead.Phone ? 40 : 0) + ratingScore;
+        const socials = Array.isArray(lead["Social Links"]) ? lead["Social Links"] : [];
+        const socialLabel = socials.length ? `Social ${socials.length}` : "";
+        const socialTitle = socials.length ? socials.join("\n") : "";
+        const row = document.createElement("tr");
+        row.dataset.leadName = lead.Name || "";
+        row.innerHTML = `
+          <td class="py-3 pr-4 font-medium">${lead.Name || "—"}</td>
+          <td class="py-3 pr-4">${lead.Phone || "—"}</td>
+          <td class="py-3 pr-4">
+            ${lead.Website ? `<a href="${lead.Website}" target="_blank" class="text-cyan-300 hover:text-cyan-200">Visit</a>` : "—"}
+          </td>
+          <td class="py-3 pr-4">${score}/100</td>
+          <td class="py-3">
+            <span>Captured</span>
+            ${socials.length ? ` · <span class="text-cyan-200" title="${socialTitle}">${socialLabel}</span>` : ""}
+          </td>
+        `;
+        resultsBody.appendChild(row);
+      }
+
+      function updateLiveFeed() {
+        statLeads.textContent = leadCount;
+        statEmails.textContent = emailCount;
+        statPhones.textContent = phoneCount;
+      }
+
+      function updateRowEnrichment(data) {
+        if (!data.Name) {
+          return;
+        }
+        enrichmentMap.set(data.Name, data);
+        const row = [...resultsBody.querySelectorAll("tr")].find(
+          (item) => item.dataset.leadName === data.Name
+        );
+        if (!row) {
+          return;
+        }
+        const statusCell = row.querySelector("td:last-child");
+        const socials = Array.isArray(data["Social Links"]) ? data["Social Links"] : [];
+        const email = data.Email ? `Email` : "";
+        const parts = [];
+        if (email) {
+          parts.push(email);
+        }
+        if (socials.length) {
+          parts.push(`Social ${socials.length}`);
+        }
+        if (parts.length) {
+          statusCell.innerHTML = `Captured · <span class="text-cyan-200" title="${[data.Email || "", ...socials].filter(Boolean).join("\n")}">${parts.join(" · ")}</span>`;
+        }
+      }
+
+      function updateGhost() {
+        const input = keywordInput.value.trim();
+        if (!input || suggestions.length === 0) {
+          keywordGhost.textContent = "";
+          return;
+        }
+        const match = suggestions.find((item) => item.toLowerCase().startsWith(input.toLowerCase()));
+        if (!match) {
+          keywordGhost.textContent = "";
+          return;
+        }
+        keywordGhost.textContent = match;
+      }
+
+      function debounce(callback, delay) {
+        let timer;
+        return (...args) => {
+          clearTimeout(timer);
+          timer = setTimeout(() => callback(...args), delay);
+        };
+      }
+
+      function renderSuggestions(items) {
+        suggestions = items;
+        if (!items.length) {
+          suggestionList.classList.add("hidden");
+          suggestionList.innerHTML = "";
+          keywordGhost.textContent = "";
+          return;
+        }
+        suggestionList.classList.remove("hidden");
+        suggestionList.innerHTML = items
+          .map(
+            (item) =>
+              `<li class="px-4 py-2 hover:bg-slate-800 cursor-pointer text-slate-200" data-value="${item}">${item}</li>`
+          )
+          .join("");
+        updateGhost();
+      }
+
+      function connectWebSocket() {
+        const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+        ws = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        ws.onopen = () => {
+          wsStatus.textContent = "Connected";
+          wsStatus.className = "text-xs px-2 py-1 rounded-full bg-cyan-400/10 text-cyan-200 border border-cyan-400/30";
+          terminal.innerHTML = "";
+          appendLog("WebSocket connected.");
+        };
+        ws.onmessage = (event) => {
+          if (event.data.startsWith("__SUGGEST__:")) {
+            const items = JSON.parse(event.data.replace("__SUGGEST__:", ""));
+            renderSuggestions(items);
+            return;
+          }
+          if (event.data.startsWith("__ENRICH__:")) {
+            const data = JSON.parse(event.data.replace("__ENRICH__:", ""));
+            if (data.Email) {
+              emailCount += 1;
+            }
+            updateRowEnrichment(data);
+            updateLiveFeed();
+            return;
+          }
+          if (event.data.startsWith("__PROGRESS__:")) {
+            progressTracker.textContent = event.data.replace("__PROGRESS__:", "");
+            return;
+          }
+          if (event.data.startsWith("__LEAD__:")) {
+            const lead = JSON.parse(event.data.replace("__LEAD__:", ""));
+            appendResultRow(lead);
+            enableCsvDownload();
+            leadCount += 1;
+            if (lead.Phone) {
+              phoneCount += 1;
+            }
+            progressTracker.textContent = `Found ${leadCount} leads`;
+            updateLiveFeed();
+            return;
+          }
+          if (event.data === "__SCRAPE_DONE__") {
+            setRunning(false);
+            downloadWrap.classList.remove("hidden");
+            progressTracker.textContent = "Complete";
+            return;
+          }
+          appendLog(event.data);
+        };
+        ws.onclose = () => {
+          wsStatus.textContent = "Disconnected";
+          wsStatus.className = "text-xs px-2 py-1 rounded-full bg-red-500/10 text-red-300 border border-red-500/30";
+          if (!running) {
+            setTimeout(connectWebSocket, 1000);
+          }
+        };
+      }
+
+      connectWebSocket();
+
+      setRunning(false);
+      advancedToggle.checked = false;
+      advancedView.classList.add("hidden");
+
+      function showDashboard() {
+        dashboard.classList.remove("hidden");
+      }
+
+      function scrollToDashboard() {
+        dashboard.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function startScrape(keyword, location) {
+        if (!ws || ws.readyState !== WebSocket.OPEN) {
+          appendLog("WebSocket is not connected.");
+          setRunning(false);
+          return;
+        }
+        const deepSearch = deepSearchToggle.checked;
+        ws.send(JSON.stringify({ type: "start", keyword, location, deep_search: deepSearch }));
+      }
+
+      const debouncedSuggest = debounce(() => {
+        const value = keywordInput.value.trim();
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ type: "SUGGEST", query: value }));
+        }
+        updateGhost();
+      }, 250);
+
+      keywordInput.addEventListener("input", () => {
+        debouncedSuggest();
+      });
+
+      keywordInput.addEventListener("focus", () => {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ type: "SUGGEST", query: keywordInput.value.trim() }));
+        }
+      });
+
+      suggestionList.addEventListener("click", (event) => {
+        const target = event.target;
+        if (target && target.dataset.value) {
+          keywordInput.value = target.dataset.value;
+          suggestionList.classList.add("hidden");
+          keywordGhost.textContent = "";
+        }
+      });
+
+      keywordInput.addEventListener("blur", () => {
+        setTimeout(() => suggestionList.classList.add("hidden"), 150);
+      });
+
+      detectLocationBtn.addEventListener("click", () => {
+        if (!navigator.geolocation) {
+          appendLog("Geolocation not supported in this browser.");
+          return;
+        }
+        detectLocationBtn.disabled = true;
+        detectLocationBtn.innerHTML = '<i data-lucide="loader"></i> Detecting...';
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            locationInput.value = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+            detectLocationBtn.disabled = false;
+            detectLocationBtn.innerHTML = '<i data-lucide="crosshair"></i> Auto-detect';
+            lucide.createIcons();
+          },
+          () => {
+            appendLog("Location permission denied.");
+            detectLocationBtn.disabled = false;
+            detectLocationBtn.innerHTML = '<i data-lucide="crosshair"></i> Auto-detect';
+            lucide.createIcons();
+          }
+        );
+      });
+
+      advancedToggle.addEventListener("change", () => {
+        const isOn = advancedToggle.checked;
+        advancedView.classList.toggle("hidden", !isOn);
+        const track = advancedToggle.nextElementSibling;
+        const dot = track.querySelector(".adv-dot");
+        if (isOn) {
+          track.classList.add("bg-cyan-400");
+          dot.classList.add("translate-x-4");
+        } else {
+          track.classList.remove("bg-cyan-400");
+          dot.classList.remove("translate-x-4");
+        }
+      });
+
+      deepSearchToggle.addEventListener("change", () => {
+        const track = deepSearchToggle.nextElementSibling;
+        const dot = track.querySelector(".dot");
+        if (deepSearchToggle.checked) {
+          track.classList.add("bg-cyan-400");
+          dot.classList.add("translate-x-5");
+        } else {
+          track.classList.remove("bg-cyan-400");
+          dot.classList.remove("translate-x-5");
+        }
+      });
+
+      recipeCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const keyword = card.dataset.keyword;
+          const location = card.dataset.location;
+          showDashboard();
+          document.getElementById("keyword").value = keyword;
+          document.getElementById("location").value = location;
+          scrollToDashboard();
+          downloadWrap.classList.add("hidden");
+          resultsBody.innerHTML = "<tr><td class=\"py-3 pr-4 text-slate-500\" colspan=\"5\">No results yet.</td></tr>";
+          downloadCsv.classList.add("opacity-50", "pointer-events-none");
+          downloadCsv.classList.remove("hover:text-cyan-200");
+          setRunning(true);
+          leadCount = 0;
+          emailCount = 0;
+          phoneCount = 0;
+          updateLiveFeed();
+          progressTracker.textContent = "Starting...";
+          appendLog(`Starting: ${keyword} in ${location}`);
+          startScrape(keyword, location);
+        });
+      });
+
+      stopBtn.addEventListener("click", () => {
+        if (!ws || ws.readyState !== WebSocket.OPEN) {
+          appendLog("WebSocket is not connected.");
+          return;
+        }
+        ws.send(JSON.stringify({ type: "stop" }));
+        appendLog("Stop requested.");
+        progressTracker.textContent = "Stopping...";
+      });
+
+      launchBtn.addEventListener("click", async () => {
+        const keyword = document.getElementById("keyword").value.trim();
+        const location = document.getElementById("location").value.trim();
+        if (!keyword || !location) {
+          appendLog("Please enter a keyword and location.");
+          return;
+        }
+
+        downloadWrap.classList.add("hidden");
+        resultsBody.innerHTML = "<tr><td class=\"py-3 pr-4 text-slate-500\" colspan=\"5\">No results yet.</td></tr>";
+        downloadCsv.classList.add("opacity-50", "pointer-events-none");
+        downloadCsv.classList.remove("hover:text-cyan-200");
+        setRunning(true);
+
+        leadCount = 0;
+        emailCount = 0;
+        phoneCount = 0;
+        updateLiveFeed();
+        progressTracker.textContent = "Starting...";
+
+        appendLog(`Starting: ${keyword} in ${location}`);
+
+        startScrape(keyword, location);
+      });
+    </script>
+  </body>
+</html>
