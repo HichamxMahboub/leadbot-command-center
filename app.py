@@ -23,6 +23,11 @@ LATEST_CSV = os.path.join(RESULTS_DIR, "latest_results.csv")
 app = FastAPI()
 
 
+@app.get("/health")
+async def health() -> JSONResponse:
+    return JSONResponse({"status": "ok"})
+
+
 class ScrapeRequest(BaseModel):
     keyword: str
     location: str

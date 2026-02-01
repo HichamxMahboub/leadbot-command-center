@@ -335,11 +335,15 @@
     <script>
       lucide.createIcons();
 
+      const API_BASE = window.API_BASE || window.location.origin;
+      const WS_BASE = API_BASE.replace("https://", "wss://").replace("http://", "ws://");
+
       const launchBtn = document.getElementById("launchBtn");
       const terminal = document.getElementById("terminal");
       const stopBtn = document.getElementById("stopBtn");
       const downloadWrap = document.getElementById("downloadWrap");
       const downloadCsv = document.getElementById("downloadCsv");
+      const downloadBtn = document.getElementById("downloadBtn");
       const resultsBody = document.getElementById("resultsBody");
       const wsStatus = document.getElementById("wsStatus");
       const dashboard = document.getElementById("dashboard");
@@ -388,6 +392,8 @@
       function enableCsvDownload() {
         downloadCsv.classList.remove("opacity-50", "pointer-events-none");
         downloadCsv.classList.add("hover:text-cyan-200");
+        downloadCsv.href = `${API_BASE}/download-csv`;
+        downloadBtn.href = `${API_BASE}/download`;
       }
 
       function appendResultRow(lead) {
@@ -489,8 +495,7 @@
       }
 
       function connectWebSocket() {
-        const protocol = window.location.protocol === "https:" ? "wss" : "ws";
-        ws = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        ws = new WebSocket(`${WS_BASE}/ws`);
         ws.onopen = () => {
           wsStatus.textContent = "Connected";
           wsStatus.className = "text-xs px-2 py-1 rounded-full bg-cyan-400/10 text-cyan-200 border border-cyan-400/30";
@@ -546,6 +551,9 @@
       }
 
       connectWebSocket();
+
+      downloadCsv.href = `${API_BASE}/download-csv`;
+      downloadBtn.href = `${API_BASE}/download`;
 
       setRunning(false);
       advancedToggle.checked = false;
