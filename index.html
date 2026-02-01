@@ -335,7 +335,9 @@
     <script>
       lucide.createIcons();
 
-      const API_BASE = window.API_BASE || window.location.origin;
+      const API_BASE = window.API_BASE || (window.location.hostname.includes("vercel.app")
+        ? "https://leadbot-command-center-production.up.railway.app"
+        : window.location.origin);
       const WS_BASE = API_BASE.replace("https://", "wss://").replace("http://", "ws://");
 
       const launchBtn = document.getElementById("launchBtn");
