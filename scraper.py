@@ -126,11 +126,14 @@ def scrape_google_maps(
                 try:
                     item.scroll_into_view_if_needed()
                     item.click()
-                    page.wait_for_timeout(1200)
+                    page.wait_for_timeout(500)
 
                     name = _safe_text(page.locator("h1.DUwDvf"))
                     if not name:
                         name = _safe_text(page.locator("h1[aria-level='1']"))
+                    if not name:
+                        card_text = item.inner_text().splitlines()
+                        name = card_text[0].strip() if card_text else None
 
                     rating_label = None
                     card_rating = item.locator(
