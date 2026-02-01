@@ -4,15 +4,6 @@
 
 A FastAPI + Playwright web app that scrapes Google Maps results and streams live logs to a modern Tailwind UI.
 
-## Quick Start
-
-```bash
-/home/homemadesavior/Dev/LeadScraper/.venv/bin/python -m pip install -r requirements.txt
-/home/homemadesavior/Dev/LeadScraper/.venv/bin/python -m playwright install chromium
-/home/homemadesavior/Dev/LeadScraper/.venv/bin/python -m uvicorn app:app --reload --port 8000
-```
-
-Open `http://localhost:8000` in your browser.
 
 ## Deploy (Railway + Vercel)
 
