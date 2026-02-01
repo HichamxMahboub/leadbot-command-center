@@ -582,6 +582,9 @@
             updateLiveFeed();
             return;
           }
+          if (event.data === "__PONG__") {
+            return;
+          }
           if (event.data.startsWith("__PROGRESS__:")) {
             progressTracker.textContent = event.data.replace("__PROGRESS__:", "");
             return;
