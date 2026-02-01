@@ -14,8 +14,21 @@ from pydantic import BaseModel
 from scraper import scrape_google_maps
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-RESULTS_DIR = os.path.join(BASE_DIR, "results")
-os.makedirs(RESULTS_DIR, exist_ok=True)
+
+
+def _resolve_results_dir() -> str:
+    if os.environ.get("VERCEL") or os.environ.get("VERCEL_ENV"):
+        return os.path.join("/tmp", "results")
+
+    return os.path.join(BASE_DIR, "results")
+
+
+RESULTS_DIR = _resolve_results_dir()
+try:
+    os.makedirs(RESULTS_DIR, exist_ok=True)
+except OSError:
+    RESULTS_DIR = os.path.join("/tmp", "results")
+    os.makedirs(RESULTS_DIR, exist_ok=True)
 LATEST_JSON = os.path.join(RESULTS_DIR, "latest_results.json")
 LATEST_XLSX = os.path.join(RESULTS_DIR, "latest_results.xlsx")
 LATEST_CSV = os.path.join(RESULTS_DIR, "latest_results.csv")

@@ -42,6 +42,20 @@ def _clean_phone(text):
     return cleaned or None
 
 
+def _wait_with_stop(page, total_ms, stop_event):
+    if not total_ms:
+        return True
+    if stop_event and stop_event.is_set():
+        return False
+    step = 100
+    steps = max(1, total_ms // step)
+    for _ in range(steps):
+        if stop_event and stop_event.is_set():
+            return False
+        page.wait_for_timeout(step)
+    return True
+
+
 def scrape_google_maps(
     query,
     location,
@@ -126,7 +140,8 @@ def scrape_google_maps(
                 try:
                     item.scroll_into_view_if_needed()
                     item.click()
-                    page.wait_for_timeout(500)
+                    if not _wait_with_stop(page, 500, stop_event):
+                        break
 
                     name = _safe_text(page.locator("h1.DUwDvf"))
                     if not name:
@@ -191,10 +206,14 @@ def scrape_google_maps(
                             social_links = []
                             email = None
                             if deep_search and website:
+                                if stop_event and stop_event.is_set():
+                                    break
                                 try:
                                     detail_page = context.new_page()
                                     detail_page.goto(website, wait_until="domcontentloaded", timeout=30000)
-                                    time.sleep(random.uniform(1, 2))
+                                    if not _wait_with_stop(detail_page, int(random.uniform(1000, 2000)), stop_event):
+                                        detail_page.close()
+                                        break
 
                                     page_text = detail_page.content()
                                     social_matches = re.findall(
@@ -265,7 +284,7 @@ def scrape_google_maps(
             if count > 0:
                 items.nth(count - 1).scroll_into_view_if_needed()
             feed.evaluate("el => { el.scrollTop = el.scrollHeight; }")
-            time.sleep(random.uniform(1, 3))
+            _wait_with_stop(page, int(random.uniform(1000, 3000)), stop_event)
             page_number = max(1, (current_index // 20) + 1)
             log(f"__PROGRESS__:Scanning page {page_number}...")
 
