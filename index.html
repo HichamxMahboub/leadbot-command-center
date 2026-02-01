@@ -340,6 +340,59 @@
         : window.location.origin);
       const WS_BASE = API_BASE.replace("https://", "wss://").replace("http://", "ws://");
 
+      const B2B_CATEGORIES = [
+        "Real Estate",
+        "Dentists",
+        "Lawyers",
+        "Roofing Contractors",
+        "Marketing Agencies",
+        "Accounting Firms",
+        "Plumbers",
+        "Electricians",
+        "HVAC Services",
+        "Chiropractors",
+        "Physical Therapists",
+        "Med Spas",
+        "Car Dealerships",
+        "Auto Repair",
+        "Restaurants",
+        "Coffee Shops",
+        "Gyms",
+        "Personal Trainers",
+        "Insurance Brokers",
+        "Mortgage Brokers",
+        "Real Estate Agents",
+        "IT Consultants",
+        "Software Companies",
+        "Web Design Agencies",
+        "SEO Agencies",
+        "Managed IT Services",
+        "Cybersecurity Firms",
+        "Logistics Companies",
+        "Freight Forwarders",
+        "Construction Companies",
+        "Architects",
+        "Interior Designers",
+        "Event Planners",
+        "Catering Companies",
+        "Hotels",
+        "Property Management",
+        "Dental Labs",
+        "Veterinary Clinics",
+        "Optometrists",
+        "Pharmacies",
+        "Home Health Care",
+        "Legal Consultants",
+        "Recruiting Agencies",
+        "Staffing Firms",
+        "E-commerce Brands",
+        "Manufacturers",
+        "Wholesalers",
+        "B2B SaaS",
+        "Coworking Spaces",
+        "Cleaning Services",
+      ];
+
       const launchBtn = document.getElementById("launchBtn");
       const terminal = document.getElementById("terminal");
       const stopBtn = document.getElementById("stopBtn");
@@ -370,6 +423,7 @@
       let emailCount = 0;
       let phoneCount = 0;
       const enrichmentMap = new Map();
+      let pingTimer = null;
 
       function appendLog(message) {
         const line = document.createElement("p");
@@ -458,11 +512,11 @@
 
       function updateGhost() {
         const input = keywordInput.value.trim();
-        if (!input || suggestions.length === 0) {
+        if (!input) {
           keywordGhost.textContent = "";
           return;
         }
-        const match = suggestions.find((item) => item.toLowerCase().startsWith(input.toLowerCase()));
+        const match = B2B_CATEGORIES.find((item) => item.toLowerCase().startsWith(input.toLowerCase()));
         if (!match) {
           keywordGhost.textContent = "";
           return;
@@ -503,6 +557,15 @@
           wsStatus.className = "text-xs px-2 py-1 rounded-full bg-cyan-400/10 text-cyan-200 border border-cyan-400/30";
           terminal.innerHTML = "";
           appendLog("WebSocket connected.");
+
+          if (pingTimer) {
+            clearInterval(pingTimer);
+          }
+          pingTimer = setInterval(() => {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+              ws.send(JSON.stringify({ type: "PING" }));
+            }
+          }, 30000);
         };
         ws.onmessage = (event) => {
           if (event.data.startsWith("__SUGGEST__:")) {
@@ -546,6 +609,10 @@
         ws.onclose = () => {
           wsStatus.textContent = "Disconnected";
           wsStatus.className = "text-xs px-2 py-1 rounded-full bg-red-500/10 text-red-300 border border-red-500/30";
+          if (pingTimer) {
+            clearInterval(pingTimer);
+            pingTimer = null;
+          }
           if (!running) {
             setTimeout(connectWebSocket, 1000);
           }
@@ -589,6 +656,16 @@
 
       keywordInput.addEventListener("input", () => {
         debouncedSuggest();
+        updateGhost();
+      });
+
+      keywordInput.addEventListener("keydown", (event) => {
+        if (event.key === "Tab" && keywordGhost.textContent) {
+          event.preventDefault();
+          keywordInput.value = keywordGhost.textContent;
+          keywordGhost.textContent = "";
+          suggestionList.classList.add("hidden");
+        }
       });
 
       keywordInput.addEventListener("focus", () => {

@@ -179,6 +179,9 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
                     matches = SUGGESTIONS[:6]
                 await manager.send("__SUGGEST__:" + json.dumps(matches))
 
+            if payload.get("type") == "PING":
+                await manager.send("__PONG__")
+
             if payload.get("type") == "start":
                 keyword = payload.get("keyword", "").strip()
                 location = payload.get("location", "").strip()

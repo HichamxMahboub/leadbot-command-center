@@ -196,21 +196,14 @@ def scrape_google_maps(
                                     detail_page.goto(website, wait_until="domcontentloaded", timeout=30000)
                                     time.sleep(random.uniform(1, 2))
 
-                                    for link in detail_page.locator("a[href]").all():
-                                        href = link.get_attribute("href") or ""
-                                        if any(
-                                            domain in href
-                                            for domain in [
-                                                "linkedin.com",
-                                                "facebook.com",
-                                                "instagram.com",
-                                                "x.com",
-                                                "twitter.com",
-                                            ]
-                                        ):
-                                            social_links.append(href)
-
                                     page_text = detail_page.content()
+                                    social_matches = re.findall(
+                                        r"https?://(?:www\.)?(?:instagram\.com|facebook\.com|linkedin\.com)/[^\"\'\s>]+",
+                                        page_text,
+                                        re.IGNORECASE,
+                                    )
+                                    social_links.extend(social_matches)
+
                                     email_match = re.search(
                                         r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
                                         page_text,
